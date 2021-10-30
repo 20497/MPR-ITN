@@ -1,6 +1,13 @@
 package pjatk.way.sandwiches.types;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Ingredients")
 public class Ingredients {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Integer calories;

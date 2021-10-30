@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pjatk.way.sandwiches.enums.SandwichSize;
 import pjatk.way.sandwiches.model.SandwichModel;
+import pjatk.way.sandwiches.services.SandwichService;
 import pjatk.way.sandwiches.types.Ingredients;
 
 import java.util.List;
@@ -13,13 +14,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/sandwich")
 public class SandwichRestController {
+    private final SandwichService sandwichService;
+
+    public SandwichRestController(SandwichService sandwichService) {
+        this.sandwichService = sandwichService;
+    }
 
     @GetMapping("/example")
     public ResponseEntity<SandwichModel> getExampleSandwich(){
-        Ingredients bread = new Ingredients(null, "white bread", 100, 1.5);
-        SandwichModel poor = new SandwichModel(null, "poor", 100, 5.0d, List.of(bread), SandwichSize.KING_SIZE);
-
-        return ResponseEntity.ok(poor);
+        return ResponseEntity.ok(sandwichService.PoorSandwichMethod());
     }
 
     @GetMapping("/null/sandwich")
@@ -29,5 +32,11 @@ public class SandwichRestController {
         SandwichModel nullSandwich = new SandwichModel(null, "nullSandwich", 100, 5.0d, null, SandwichSize.KING_SIZE);
 
         return ResponseEntity.ok(nullSandwich);
+    }
+
+    @GetMapping("/BOSS")
+    public ResponseEntity<SandwichModel> getBossSandwich()
+    {
+        return ResponseEntity.ok(sandwichService.RealManSandwichMethod());
     }
 }

@@ -4,15 +4,20 @@ import pjatk.way.sandwiches.enums.SandwichSize;
 import pjatk.way.sandwiches.types.Ingredients;
 import pjatk.way.sandwiches.types.Sizes;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
+@Table(name = "Sandwich")
 public class SandwichModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private Integer baseCalories;
     private Double basePrice;
+    @OneToMany
     private List<Ingredients> ingredients;
     private SandwichSize sandwichSize;
 
