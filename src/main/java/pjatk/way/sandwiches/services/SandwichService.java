@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SandwichService {
@@ -34,5 +35,46 @@ public class SandwichService {
         Ingredients meat = new Ingredients( null, "BEEF", 300, 4.0);
         SandwichModel sandwich = new SandwichModel(null, "Real MAN", 1000, 10.0d, List.of(meat, bread), SandwichSize.KING_SIZE);
         return sandwichRepository.save(sandwich);
+    }
+
+    public SandwichModel findById(Integer id){
+        Optional<SandwichModel> byId = sandwichRepository.findById(id);
+        return byId.orElseThrow(RuntimeException::new);
+    }
+
+    public void addIngredient(SandwichModel sandwichModel, Ingredients ingredients){
+        if(sandwichModel.getIngredients() != null){
+            sandwichModel.getIngredients().add(ingredients);
+        }
+    }
+
+    public void changeName(SandwichModel sandwichModel){
+        if(sandwichModel.getName() != null) {
+            sandwichModel.setName(sandwichModel.getName() + "abc");
+        }
+    }
+
+    public void changeSandwichSize(SandwichModel sandwichModel, SandwichSize sandwichSize){
+        if(sandwichModel.getSandwichSize() != null){
+            sandwichModel.setSandwichSize(sandwichSize.SMALL);
+        }
+    }
+
+    public void changeBaseCalories(SandwichModel sandwichModel){
+        if(sandwichModel.getBaseCalories() != null){
+            sandwichModel.setBaseCalories(100);
+        }
+    }
+
+    public void changeBasePrice(SandwichModel sandwichModel){
+        if(sandwichModel.getBasePrice() != null){
+            sandwichModel.setBasePrice(20d);
+        }
+    }
+
+    public void changeId(SandwichModel sandwichModel){
+        if(sandwichModel.getId() != null){
+            sandwichModel.setId(997);
+        }
     }
 }

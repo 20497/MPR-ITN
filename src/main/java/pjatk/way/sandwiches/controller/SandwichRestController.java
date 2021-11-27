@@ -1,9 +1,7 @@
 package pjatk.way.sandwiches.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pjatk.way.sandwiches.enums.SandwichSize;
 import pjatk.way.sandwiches.model.SandwichModel;
 import pjatk.way.sandwiches.services.SandwichService;
@@ -21,7 +19,7 @@ public class SandwichRestController {
     }
 
     @GetMapping("/example")
-    public ResponseEntity<SandwichModel> getExampleSandwich(){
+    public ResponseEntity<SandwichModel> getExampleSandwich(@RequestParam(required = false) String sandwichName){
         return ResponseEntity.ok(sandwichService.PoorSandwichMethod());
     }
 
@@ -38,5 +36,10 @@ public class SandwichRestController {
     public ResponseEntity<SandwichModel> getBossSandwich()
     {
         return ResponseEntity.ok(sandwichService.RealManSandwichMethod());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<SandwichModel> findById(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(sandwichService.findById(id));
     }
 }
