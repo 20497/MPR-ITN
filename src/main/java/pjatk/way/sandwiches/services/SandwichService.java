@@ -72,11 +72,26 @@ public class SandwichService {
         }
     }
 
-    public Integer getSandwichPriceUnderRange(SandwichModel sandwichModel, Ingredients ingredients, Integer range){
-        if(sandwichModel.getBasePrice() + ingredients.getPrice() <= range){
+    public Integer getSandwichPriceUnderRange(SandwichModel sandwichModel, Integer range){
+        double sandwichUnderPriceRange = sandwichModel.getBasePrice();
+        sandwichModel.getIngredients();
+        for(Ingredients ingredients : sandwichModel.getIngredients()){
+            sandwichUnderPriceRange += ingredients.getPrice();
+        }
+
+        if(sandwichUnderPriceRange <= range){
             return sandwichModel.getId();
         } else {
             return null;
         }
+    }
+
+    public double calculatePrice(SandwichModel sandwichModel){
+        double finalPrice = sandwichModel.getBasePrice();
+        sandwichModel.getIngredients();
+        for(Ingredients ingredients : sandwichModel.getIngredients()){
+            finalPrice += ingredients.getPrice();
+        }
+        return finalPrice;
     }
 }
