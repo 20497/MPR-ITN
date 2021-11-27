@@ -72,9 +72,11 @@ public class SandwichService {
         }
     }
 
-    public void changeId(SandwichModel sandwichModel){
-        if(sandwichModel.getId() != null){
-            sandwichModel.setId(997);
+    public Integer getSandwichPriceUnderRange(SandwichModel sandwichModel, Ingredients ingredients, Integer range){
+        if(sandwichModel.getBasePrice() + ingredients.getPrice() <= range){
+            return sandwichModel.getId();
+        } else {
+            return null;
         }
     }
 }
