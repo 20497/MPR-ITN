@@ -2,7 +2,6 @@ package pjatk.way.sandwiches.model;
 
 import pjatk.way.sandwiches.enums.SandwichSize;
 import pjatk.way.sandwiches.types.Ingredients;
-import pjatk.way.sandwiches.types.Sizes;
 
 import javax.persistence.*;
 import java.util.ArrayList;

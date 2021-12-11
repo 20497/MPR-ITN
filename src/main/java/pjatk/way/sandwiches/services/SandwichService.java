@@ -37,11 +37,6 @@ public class SandwichService {
         return sandwichRepository.save(sandwich);
     }
 
-    public SandwichModel findById(Integer id){
-        Optional<SandwichModel> byId = sandwichRepository.findById(id);
-        return byId.orElseThrow(RuntimeException::new);
-    }
-
     public void addIngredient(SandwichModel sandwichModel, Ingredients ingredients){
         if(sandwichModel.getIngredients() != null){
             sandwichModel.getIngredients().add(ingredients);
@@ -93,5 +88,23 @@ public class SandwichService {
             finalPrice += ingredients.getPrice();
         }
         return finalPrice;
+    }
+
+    public SandwichModel findById(Integer id){
+        Optional<SandwichModel> byId = sandwichRepository.findById(id);
+        return byId.orElse(null);
+    }
+
+    public List<SandwichModel> findAll(){
+        List<SandwichModel> byId = sandwichRepository.findAll();
+        return byId;
+    }
+
+    public void deleteById(Integer id){
+        sandwichRepository.deleteById(id);
+    }
+
+    public Boolean existsById(Integer id){
+        return sandwichRepository.existsById(id);
     }
 }
